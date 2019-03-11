@@ -1,0 +1,32 @@
+{
+  "name": "s-hotchpotch",
+  "version": "1.0.0",
+  "description": "personal lab",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wanyuyan/s-hotchpotch.git"
+  },
+  "author": "wanyy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wanyuyan/s-hotchpotch/issues"
+  },
+  "homepage": "https://github.com/wanyuyan/s-hotchpotch#readme",
+  "dependencies": {
+    "@babel/polyfill": "^7.2.5",
+    "@babel/runtime": "^7.3.4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.4",
+    "@babel/plugin-proposal-export-default-from": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/preset-react": "^7.0.0",
+    "react": "^16.8.4"
+  }
+}
