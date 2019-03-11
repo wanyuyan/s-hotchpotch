@@ -4,7 +4,7 @@
   "description": "personal lab",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --config webpack.config.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +27,11 @@
     "@babel/plugin-transform-runtime": "^7.3.4",
     "@babel/preset-env": "^7.3.4",
     "@babel/preset-react": "^7.0.0",
-    "react": "^16.8.4"
+    "css-loader": "^2.1.1",
+    "react": "^16.8.4",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3"
   }
 }
