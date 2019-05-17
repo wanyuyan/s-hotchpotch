@@ -4,7 +4,9 @@
   "description": "personal lab",
   "main": "app.js",
   "scripts": {
-    "build": "webpack --config webpack.config.js"
+    "start": "webpack-dev-server --open",
+    "build": "webpack --config webpack.prod.config.js",
+    "server": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -32,6 +34,7 @@
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.29.6",
-    "webpack-cli": "^3.2.3"
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.3.1"
   }
 }
