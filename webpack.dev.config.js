@@ -8,7 +8,7 @@ module.exports = {
   mode: 'development',
   entry: './src/app.jsx',
   output: {
-    filename: '[name].bundle.js',
+    filename: '[name].[contenthash].bundle.js',
     chunkFilename: '[name].[contenthash].bundle.js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',    // csdn url, prod
@@ -21,7 +21,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.m?jsx$/,
+        test: /\.m?jsx|js$/,
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: 'babel-loader',
@@ -113,5 +113,18 @@ module.exports = {
       template: 'src/index.html'
     }),
     new webpack.HotModuleReplacementPlugin()
-  ]
+  ],
+  
+  optimization: {
+    runtimeChunk: 'single',
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all'
+        }
+      }
+    }
+  }
 };
