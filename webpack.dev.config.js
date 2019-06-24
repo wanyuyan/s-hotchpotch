@@ -8,15 +8,23 @@ module.exports = {
   mode: 'development',
   entry: './src/app.jsx',
   output: {
-    filename: '[name].[contenthash].bundle.js',
-    chunkFilename: '[name].[contenthash].bundle.js',
+    filename: '[name].[hash:8].bundle.js',
+    chunkFilename: '[name].[contenthash:8].bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/',    // csdn url, prod
+    publicPath: '/',      // CDN地址
   },
-  devtool: 'inline-source-map',
+  devtool: "inline-source-map",
   devServer: {
     contentBase: './dist',
-    hot: true
+    host: "localhost",
+    port: 9090,
+    hot: true,
+    historyApiFallback:true,
+    overlay: true,  // 代码出错弹出浮层
+    // proxy: {
+    //   // 代理到后端的服务地址，会拦截所有以api开头的请求地址
+    //   "/api": "http://localhost:3000"
+    // }
   },
   module: {
     rules: [
@@ -31,8 +39,8 @@ module.exports = {
               [
                 "@babel/preset-env",
                 {
-                  "modules": false,                             // 模块使用 es6 modules ，不使用 commonJS 规范, 因为v2及以上的webpack的 treeshaking功能只对es6 modules 有效
-                  "useBuiltIns": 'usage',                       // 默认 false, 可选 entry , usage
+                  "modules": false,                             // development模式下的tree shaking 不生效，方便调试
+                  "useBuiltIns": 'usage',                       // 按需引入polyfill, 默认 false, 可选 entry , usage,
                 }
               ],
               "@babel/preset-react"
@@ -73,16 +81,17 @@ module.exports = {
       },
       {
         test: /\.scss$/,
+        include: path.resolve(__dirname, "src"),
         exclude: /node_modules/,
         use: [
           {
-            loader: 'style-loader',               // creates style nodes from JS strings
+            loader: 'style-loader',               // creates style nodes from JS strings, 把css文件变成style标签插入head中
             options: {
               sourceMap: true
             }
           },
           {
-            loader: 'css-loader',                 // translates CSS into CommonJS
+            loader: 'css-loader',                 // translates CSS into CommonJS, 用来处理css中url的路径
             options: {
               modules: true,
               sourceMap: true
@@ -96,27 +105,50 @@ module.exports = {
           }
         ]
       },
+      // file-loader 解决css等文件中引入图片路径的问题，解析图片地址，把图片从源文件拷贝到目标文件并修改源文件名字
+      // url-loader 在文件比较小时，直接转变成base64字符串内嵌到页面中
       {
-        test: /\.(png|svg|jpg|gif)$/,
-        use: 'file-loader'
+        test: /\.(png|svg|jpg|gif|svg)$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            outputPath: "/images",        // 图片输出路径
+            limit: 5 * 1024
+          }
+        }
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: 'file-loader'
+        use: {
+          loader: "url-loader",
+          options: {
+            name: '[name]-[hash:5].min.[ext]',
+            limit: 5000,        // fonts file size <= 5KB, use 'base64'; else, output svg file
+            publicPath: 'fonts/',
+            outputPath: 'fonts/'
+          }
+        }
       }
     ],
   },
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
+      filename: "index.html",
+      template: 'src/index.html',
       title: 'HotChpotch',
-      template: 'src/index.html'
+      hash: true,
+      minify: {
+        removeAttributeQuotes: true  // 压缩，去掉引号
+      }
     }),
     new webpack.HotModuleReplacementPlugin()
   ],
-  
   optimization: {
-    runtimeChunk: 'single',
+    namedModules: true,
+    runtimeChunk: {
+      name: "runtime"
+    },
     splitChunks: {
       cacheGroups: {
         vendor: {
@@ -126,5 +158,11 @@ module.exports = {
         }
       }
     }
+  },
+  resolve: {
+    extensions: [".js", ".jsx"],
+    // alias: {
+    //   pages: path.join(__dirname, "src/pages")
+    // }
   }
 };
