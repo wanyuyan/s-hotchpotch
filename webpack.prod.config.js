@@ -76,6 +76,15 @@ module.exports = {
           // 如果不做配置，我们的css是直接打包进js里面的，我们希望能单独生成css文件。 因为单独生成css,css可以和js并行下载，提高页面加载效率
           MiniCssExtractPlugin.loader,
           "css-loader",
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins: [
+                require('autoprefixer')()
+              ]
+            }
+          },
           "sass-loader"
         ]
       },
@@ -108,8 +117,13 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
+      filename: "index.html",
+      template: 'src/index.html',
       title: 'HotChpotch',
-      template: 'src/index.html'
+      hash: true,
+      minify: {
+        removeAttributeQuotes: true  // 压缩，去掉引号
+      }
     }),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output

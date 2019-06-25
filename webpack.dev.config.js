@@ -8,8 +8,8 @@ module.exports = {
   mode: 'development',
   entry: './src/app.jsx',
   output: {
-    filename: '[name].[hash:8].bundle.js',
-    chunkFilename: '[name].[contenthash:8].bundle.js',
+    filename: '[name].[hash:8].file.js',
+    chunkFilename: '[name].[contenthash:8].chunk.js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',      // CDN地址
   },
@@ -74,9 +74,9 @@ module.exports = {
         test: /\.less$/,
         include: /node_modules/,
         use: [
-            'style-loader',
-            'css-loader',
-            {loader: 'less-loader', options: {modifyVars: antTheme}},
+          'style-loader',
+          'css-loader',
+          {loader: 'less-loader', options: {modifyVars: antTheme}},
         ]
       },
       {
@@ -95,6 +95,16 @@ module.exports = {
             options: {
               modules: true,
               sourceMap: true
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              sourceMap: true,
+              plugins: [
+                require('autoprefixer')()
+              ]
             }
           },
           {
@@ -137,10 +147,6 @@ module.exports = {
       filename: "index.html",
       template: 'src/index.html',
       title: 'HotChpotch',
-      hash: true,
-      minify: {
-        removeAttributeQuotes: true  // 压缩，去掉引号
-      }
     }),
     new webpack.HotModuleReplacementPlugin()
   ],
