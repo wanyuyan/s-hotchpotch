@@ -67,7 +67,17 @@ module.exports = {
         test: /\.css$/,
         use:[
           {loader:'style-loader'},
-          {loader:'css-loader'}
+          {loader:'css-loader'},
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              sourceMap: true,
+              plugins: [
+                require('autoprefixer')()
+              ]
+            }
+          },
         ]
       },
       {
@@ -166,7 +176,7 @@ module.exports = {
     }
   },
   resolve: {
-    extensions: [".js", ".jsx"],
+    extensions: [".js", ".jsx", ".scss", ".css"],
     // alias: {
     //   pages: path.join(__dirname, "src/pages")
     // }

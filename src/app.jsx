@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import AppRouter from "./router";
 
-import "./style/reset.scss";
+import "./style/index";
 
 
-ReactDOM.render(<AppRouter />, document.getElementById("root"));
+ReactDOM.render(<AppRouter />, document.getElementById("app"));

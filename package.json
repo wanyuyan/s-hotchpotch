@@ -19,7 +19,8 @@
   },
   "homepage": "https://github.com/wanyuyan/s-hotchpotch#readme",
   "antTheme": {
-    "brand-primary": "#FF8888"
+    "brand-primary": "#FF8888",
+    "brand-primary-tap": "#FF3333"
   },
   "dependencies": {
     "@babel/polyfill": "^7.2.5",

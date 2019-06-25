@@ -7,7 +7,6 @@ export default function Home() {
     <div>
       <h2>Home</h2>
       <Navigation />
-      <Button type="primary">Button</Button>
     </div>
   );
 }
