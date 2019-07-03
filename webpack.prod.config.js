@@ -2,18 +2,21 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const PurifyCSS = require('purifycss-webpack')
-const glob = require('glob-all')
+const PurifyCSS = require('purifycss-webpack');
+const glob = require('glob-all');
+const ManifestPlugin = require('webpack-manifest-plugin');
 const antTheme = require('./package.json').antTheme;
+
+const publicPath = "/";
 
 module.exports = {
   mode: 'production',
   entry: './src/app.jsx',
   output: {
-    filename: '[name].[hash:8].bundle.js',
-    chunkFilename: '[name].[contenthash:8].bundle.js',
+    filename: 'static/js/[name].[hash:8].bundle.js',
+    chunkFilename: 'static/js/[name].[contenthash:8].bundle.js',
     path: path.resolve(__dirname, 'build'),
-    publicPath: '/',
+    publicPath: publicPath,
   },
   devtool: "source-map",
   module: {
@@ -127,8 +130,8 @@ module.exports = {
     }),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
-      filename: "[name].[contenthash:8].css",
-      chunkFilename: "[name].[contenthash:8].css"
+      filename: "/static/css/[name].[contenthash:8].css",
+      chunkFilename: "/static/css/[name].[contenthash:8].css"
     }),
     new PurifyCSS({                 // 清除无用 css
       paths: glob.sync([
@@ -136,7 +139,21 @@ module.exports = {
         path.resolve(__dirname, './src/*.html'), // 请注意，我们同样需要对 html 文件进行 tree shaking
         path.resolve(__dirname, './src/*.js')
       ])
-    })
+    }),
+    new ManifestPlugin({
+      fileName: 'asset-manifest.json',
+      publicPath: publicPath,
+      generate: (seed, files) => {
+        const manifestFiles = files.reduce(function(manifest, file) {
+          manifest[file.name] = file.path;
+          return manifest;
+        }, seed);
+
+        return {
+          files: manifestFiles,
+        };
+      },
+    }),
   ],
   optimization: {
     runtimeChunk: "single",
@@ -152,7 +169,7 @@ module.exports = {
     }
   },
   resolve: {
-    extensions: [".js", ".jsx"],
+    extensions: [".js", ".jsx", ".scss", ".css"],
     // alias: {
     //   pages: path.join(__dirname, "src/pages")
     // }
