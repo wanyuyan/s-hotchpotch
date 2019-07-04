@@ -3,11 +3,11 @@ import loadable from "@loadable/component";
 
 const loadFallback = {fallback: <div>Loading...</div>};
 const containers = {
-  Home: loadable(() => import("./home"), loadFallback),
-  About: loadable(() => import("./about"), loadFallback),
-  Users: loadable(() => import("./users"), loadFallback),
-  RTCDemo: loadable(() => import("./rtc-demo"), loadFallback),
-  NotFound: loadable(() => import("./not-found"), loadFallback),
+  Home: loadable(() => import(/* webpackChunkName: "home" */"./home"), loadFallback),
+  About: loadable(() => import(/* webpackChunkName: "about" */"./about"), loadFallback),
+  Users: loadable(() => import(/* webpackChunkName: "users" */"./users"), loadFallback),
+  RTCDemo: loadable(() => import(/* webpackChunkName: "rtc-demo" */"./rtc-demo"), loadFallback),
+  NotFound: loadable(() => import(/* webpackChunkName: "not-found" */"./not-found"), loadFallback),
 }
 
 export default containers;

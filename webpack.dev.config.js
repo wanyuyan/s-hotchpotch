@@ -65,6 +65,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
+        include: [/node_modules/, /public/],
         use:[
           {loader:'style-loader'},
           {loader:'css-loader'},
@@ -83,6 +84,7 @@ module.exports = {
       {
         test: /\.less$/,
         include: /node_modules/,
+        exclude: path.resolve(__dirname, "src"),
         use: [
           'style-loader',
           'css-loader',
@@ -90,11 +92,11 @@ module.exports = {
             modifyVars: antTheme,
             javascriptEnabled: true
           }},
-        ]      
+        ]
       },
       {
         test: /\.scss$/,
-        include: path.resolve(__dirname, "src"),
+        include: /src/,
         exclude: /node_modules/,
         use: [
           {
@@ -106,7 +108,8 @@ module.exports = {
           {
             loader: 'css-loader',                 // translates CSS into CommonJS, 用来处理css中url的路径
             options: {
-              modules: true,
+              // modules: true,
+              importLoaders: 1,
               sourceMap: true
             }
           },

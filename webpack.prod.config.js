@@ -59,8 +59,17 @@ module.exports = {
       {
         test: /\.css$/,
         use:[
-          {loader:'style-loader'},
-          {loader:'css-loader'}
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins: [
+                require('autoprefixer')()
+              ]
+            }
+          },
         ]
       },
       {
@@ -69,7 +78,10 @@ module.exports = {
         use: [
             'style-loader',
             'css-loader',
-            {loader: 'less-loader', options: {modifyVars: antTheme}},
+            {loader: 'less-loader', options: {
+              modifyVars: antTheme,
+              javascriptEnabled: true
+            }},
         ]
       },
       {
@@ -162,7 +174,6 @@ module.exports = {
       cacheGroups: {
         vendor: {
           test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
           chunks: 'all'
         }
       }

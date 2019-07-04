@@ -47,20 +47,20 @@ function RTCDemo() {
 
   return (
     <div>
-      <h2>Baidu RTC</h2>
+      <header className="title">Baidu RTC</header>
       {roomin
         ? <div>
             <Button type="primary" onClick={stop}>退出房间</Button>
           </div>
         : <div>
             <InputItem
+              className="room-input"
               id="roomname"
               autoComplete="off"
               placeholder="请输入房间号"
               defaultValue={roomName}
               onChange={e => setRoomName(e.target.value)}
             />
-            <WhiteSpace />
             <Button type="primary" onClick={start}>进入房间</Button>
           </div>
       }
