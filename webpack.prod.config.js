@@ -121,7 +121,7 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       filename: "index.html",
-      template: 'src/index.html',
+      template: 'public/index.html',
       title: 'HotChpotch',
       hash: true,
       minify: {

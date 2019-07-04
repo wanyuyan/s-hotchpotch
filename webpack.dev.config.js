@@ -86,8 +86,11 @@ module.exports = {
         use: [
           'style-loader',
           'css-loader',
-          {loader: 'less-loader', options: {modifyVars: antTheme}},
-        ]
+          {loader: 'less-loader', options: {
+            modifyVars: antTheme,
+            javascriptEnabled: true
+          }},
+        ]      
       },
       {
         test: /\.scss$/,
@@ -148,6 +151,10 @@ module.exports = {
             outputPath: 'fonts/'
           }
         }
+      },
+      {
+        test: require.resolve("./public/external.js"),
+        use: "imports-loader?this=>window"
       }
     ],
   },
@@ -155,7 +162,7 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       filename: "index.html",
-      template: 'src/index.html',
+      template: 'public/index.html',
       title: 'HotChpotch',
     }),
     new webpack.HotModuleReplacementPlugin()
@@ -177,8 +184,12 @@ module.exports = {
   },
   resolve: {
     extensions: [".js", ".jsx", ".scss", ".css"],
+    
     // alias: {
     //   pages: path.join(__dirname, "src/pages")
     // }
+  },
+  externals: {
+    external: true
   }
 };

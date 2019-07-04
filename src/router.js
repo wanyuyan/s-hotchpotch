@@ -9,6 +9,7 @@ const AppRouter = () => {
         <Route exact path="/" component={containers.Home} />
         <Route path="/about" component={containers.About} />
         <Route path="/users" component={containers.Users} />
+        <Route path="/rtc" component={containers.RTCDemo} />
         <Route component={containers.NotFound} />
       </Switch>
     </Router>
