@@ -46,15 +46,13 @@ function RTCDemo(props) {
   const stop = () => {
     bRTC.stop();
   }
-  
+
   return (
     <div>
       <TopNav title="BaiduRtc" history={props.history} />
       <div className="container">
         {roomin
-          ? <div>
-              <Button type="primary" onClick={stop}>退出房间</Button>
-            </div>
+          ? <Button type="primary" className="room-btn" onClick={stop}>退出房间</Button>
           : <div>
               <InputItem
                 className="room-input"
@@ -64,7 +62,7 @@ function RTCDemo(props) {
                 defaultValue={roomName}
                 onChange={e => setRoomName(e.target.value)}
               />
-              <Button type="primary" onClick={start}>进入房间</Button>
+              <Button type="primary" className="room-btn" onClick={start}>进入房间</Button>
             </div>
         }
 
