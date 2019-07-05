@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, InputItem, WhiteSpace } from "antd-mobile";
+import { Button, InputItem } from "antd-mobile";
 import bRTC from "../../../public/baidu_rtc/brtc.sdk.js";
 import ErrorBoundary from "../../components/ErrorBoundary";
 import "../../../public/baidu_rtc/main.css";
