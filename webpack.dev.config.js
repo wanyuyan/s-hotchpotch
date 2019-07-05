@@ -49,6 +49,7 @@ module.exports = {
               "@babel/plugin-proposal-export-default-from",
               "@babel/plugin-proposal-object-rest-spread",
               "@babel/plugin-syntax-dynamic-import",
+              ["@babel/plugin-syntax-decorators", {"decoratorsBeforeExport": true}],
               [
                 "@babel/plugin-transform-runtime",              // disables automatic per-file runtime injection in Babel, insdead making all helper references use it
                 {
@@ -187,12 +188,8 @@ module.exports = {
   },
   resolve: {
     extensions: [".js", ".jsx", ".scss", ".css"],
-    
-    // alias: {
-    //   pages: path.join(__dirname, "src/pages")
-    // }
-  },
-  externals: {
-    external: true
+    alias: {
+      Components: path.resolve(__dirname, 'src/Components/'),
+    }
   }
 };
