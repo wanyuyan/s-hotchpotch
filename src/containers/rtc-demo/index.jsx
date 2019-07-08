@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, InputItem } from "antd-mobile";
+import Stomp from '@stomp/stompjs';
 import ErrorBoundary from "Components/ui/ErrorBoundary";
 import TopNav from "Components/business/TopNav/index.jsx";
 import bRTC from "../../../public/baidu_rtc/brtc.sdk.js";
@@ -12,6 +13,7 @@ function RTCDemo(props) {
   const [roomin, setRoomIn] = useState(false);
 
   const start = () => {
+    // const client = Stomp.client("wss://rtc.exp.bcelive.com:8989/janus");
     bRTC.start({
       server: "wss://rtc.exp.bcelive.com:8989/janus",
       appid: "75c664d50ae5432581fcfe2c9c3011d5",
@@ -46,6 +48,8 @@ function RTCDemo(props) {
   const stop = () => {
     bRTC.stop();
   }
+
+  console.log("props", props);
 
   return (
     <div>

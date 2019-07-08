@@ -26,10 +26,12 @@
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
     "@loadable/component": "^5.10.1",
+    "@stomp/stompjs": "^5.4.2",
     "antd-mobile": "^2.2.14",
     "react-fastclick": "^3.0.2",
     "react-router": "^5.0.1",
-    "react-router-dom": "^5.0.1"
+    "react-router-dom": "^5.0.1",
+    "websocket": "^1.0.29"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
