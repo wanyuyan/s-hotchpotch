@@ -49,8 +49,6 @@ function RTCDemo(props) {
     bRTC.stop();
   }
 
-  console.log("props", props);
-
   return (
     <div>
       <TopNav title="BaiduRtc" history={props.history} />

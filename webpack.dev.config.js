@@ -16,7 +16,7 @@ module.exports = {
   devtool: "inline-source-map",
   devServer: {
     contentBase: './dist',
-    host: "localhost",
+    host: "192.168.0.202",
     port: 9090,
     hot: true,
     historyApiFallback:true,

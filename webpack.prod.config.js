@@ -174,6 +174,7 @@ module.exports = {
       cacheGroups: {
         vendor: {
           test: /[\\/]node_modules[\\/]/,
+          name: "vendors",
           chunks: 'all'
         }
       }
@@ -181,8 +182,8 @@ module.exports = {
   },
   resolve: {
     extensions: [".js", ".jsx", ".scss", ".css"],
-    // alias: {
-    //   pages: path.join(__dirname, "src/pages")
-    // }
+    alias: {
+      Components: path.resolve(__dirname, 'src/Components/'),
+    }
   }
 };
