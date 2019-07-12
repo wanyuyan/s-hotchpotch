@@ -111,7 +111,7 @@ module.exports = {
         use: {
           loader: 'url-loader',
           options: {
-            outputPath: "/images",        // 图片输出路径
+            outputPath: "static/public/images",        // 图片输出路径
             limit: 5 * 1024
           }
         }
@@ -138,8 +138,8 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
+      template: "public/index.html",
       filename: "index.html",
-      template: 'public/index.html',
       title: 'HotChpotch',
       hash: true,
       minify: {
