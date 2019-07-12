@@ -16,7 +16,7 @@ module.exports = {
   devtool: "inline-source-map",
   devServer: {
     contentBase: './dist',
-    host: "192.168.0.202",
+    host: "localhost",    // 192.168.0.202
     port: 9090,
     hot: true,
     historyApiFallback:true,
@@ -135,7 +135,7 @@ module.exports = {
       // url-loader 在文件比较小时，直接转变成base64字符串内嵌到页面中
       {
         test: /\.(png|jpg|gif|svg)$/,
-        exclude: path.resolve(__dirname, "public/imgages/icons"),
+        exclude: path.resolve(__dirname, "public/images/icons"),
         use: {
           loader: 'url-loader',
           options: {
@@ -147,7 +147,7 @@ module.exports = {
       {
         test: /\.svg$/,
         loader: 'svg-sprite-loader',
-        include: path.resolve(__dirname, "public/imgages/icons")
+        include: path.resolve(__dirname, "public/images/icons")
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,

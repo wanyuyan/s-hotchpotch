@@ -12,7 +12,8 @@ body {
 @media screen and (orientation: portrait) {
   html,
   body,
-  #app {
+  #app,
+  .app-container {
     width : 100vmin;
     height : 100vmax;
   }
@@ -28,7 +29,8 @@ body {
 @media screen and (orientation: landscape) {
   html,
   body,
-  #app{
+  #app,
+  .app-container {
     width : 100vmin;
     height : 100vmax;
   }

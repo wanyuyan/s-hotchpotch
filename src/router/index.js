@@ -8,6 +8,7 @@ const AppRouter = () => {
       <Switch>
         <Route exact path="/" component={containers.Home} />
         <Route path="/rtc" component={containers.RTCDemo} />
+        <Route path="/iframe" component={containers.IframeDemo} />
         <Route component={containers.NotFound} />
       </Switch>
     </Router>
