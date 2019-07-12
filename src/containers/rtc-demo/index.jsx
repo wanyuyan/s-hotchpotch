@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, InputItem } from "antd-mobile";
-import Stomp from '@stomp/stompjs';
 import ErrorBoundary from "Components/ui/ErrorBoundary";
+import FullScreen from "Components/ui/FullScreen";
 import TopNav from "Components/business/TopNav/index.jsx";
 import bRTC from "../../../public/baidu_rtc/brtc.sdk.js";
 import "../../../public/baidu_rtc/main.css";
@@ -13,7 +13,6 @@ function RTCDemo(props) {
   const [roomin, setRoomIn] = useState(false);
 
   const start = () => {
-    // const client = Stomp.client("wss://rtc.exp.bcelive.com:8989/janus");
     bRTC.start({
       server: "wss://rtc.exp.bcelive.com:8989/janus",
       appid: "75c664d50ae5432581fcfe2c9c3011d5",
@@ -52,6 +51,7 @@ function RTCDemo(props) {
   return (
     <div>
       <TopNav title="BaiduRtc" history={props.history} />
+      <FullScreen />
       <div className="container">
         {roomin
           ? <Button type="primary" className="room-btn" onClick={stop}>退出房间</Button>
@@ -64,7 +64,7 @@ function RTCDemo(props) {
                 defaultValue={roomName}
                 onChange={e => setRoomName(e.target.value)}
               />
-              <Button type="primary" className="room-btn" onClick={start}>进入房间</Button>
+              <Button type="primary" className="room-btn" onClick={start}>进入聊天室</Button>
             </div>
         }
 

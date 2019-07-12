@@ -1,7 +1,8 @@
 import React from "react";
 import loadable from "@loadable/component";
+import PageLoading from "Components/business/PageLoading";
 
-const loadFallback = {fallback: <div>Loading...</div>};
+const loadFallback = {fallback: <PageLoading />};
 const containers = {
   Home: loadable(() => import(/* webpackChunkName: "home" */"../containers/home"), loadFallback),
   RTCDemo: loadable(() => import(/* webpackChunkName: "rtc-demo" */"../containers/rtc-demo"), loadFallback),

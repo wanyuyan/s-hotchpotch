@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import CustomIcon from "Components/ui/CustomIcon";
 import "./index.scss";
 
-// console.log("Enlarge", Enlarge);
-
 export default function FullScreen() {
   const [isFullScreen, setIsFullScreen] = useState(false);
 
@@ -38,11 +36,7 @@ export default function FullScreen() {
   return (
     <div className="full-screen-icon">
       <CustomIcon
-        type={isFullScreen
-          ? "ensmall"
-          : "enlarge"
-        }
-        size="large"
+        type={isFullScreen ? "ensmall" : "enlarge"}
         onClick={fullScreen}
       />
     </div>
