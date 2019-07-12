@@ -6,7 +6,7 @@ const antTheme = require('./package.json').antTheme;
 
 module.exports = {
   mode: 'development',
-  entry: './src/app.jsx',
+  entry: ["./src/app.jsx", "./public/images/icons"],
   output: {
     filename: '[name].[hash:8].file.js',
     chunkFilename: '[name].[contenthash:8].chunk.js',
@@ -58,7 +58,6 @@ module.exports = {
                 }
               ],
               ["import", {libraryName: "antd-mobile", style: true}],  // `style: true` 会加载 less 文件
-              
             ],
             cacheDirectory: true                                 // Default false. When set, the given directory will be used to cache the results of the loader. Future webpack builds will attempt to read from the cache to avoid needing to run the potentially expensive Babel recompilation process on each run.
           }
@@ -135,7 +134,8 @@ module.exports = {
       // file-loader 解决css等文件中引入图片路径的问题，解析图片地址，把图片从源文件拷贝到目标文件并修改源文件名字
       // url-loader 在文件比较小时，直接转变成base64字符串内嵌到页面中
       {
-        test: /\.(png|svg|jpg|gif|svg)$/,
+        test: /\.(png|jpg|gif|svg)$/,
+        exclude: path.resolve(__dirname, "public/imgages/icons"),
         use: {
           loader: 'url-loader',
           options: {
@@ -143,6 +143,11 @@ module.exports = {
             limit: 5 * 1024
           }
         }
+      },
+      {
+        test: /\.svg$/,
+        loader: 'svg-sprite-loader',
+        include: path.resolve(__dirname, "public/imgages/icons")
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
@@ -190,6 +195,7 @@ module.exports = {
     extensions: [".js", ".jsx", ".scss", ".css"],
     alias: {
       Components: path.resolve(__dirname, 'src/Components/'),
+      Images: path.resolve(__dirname, "public/images")
     }
   }
 };

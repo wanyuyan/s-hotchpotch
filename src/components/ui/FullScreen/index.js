@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { Icon } from "antd-mobile";
+import CustomIcon from "Components/ui/CustomIcon";
 import "./index.scss";
+
+// console.log("Enlarge", Enlarge);
 
 export default function FullScreen() {
   const [isFullScreen, setIsFullScreen] = useState(false);
@@ -34,9 +36,13 @@ export default function FullScreen() {
   }
 
   return (
-    <div className="full-screen">
-      <Icon
-        type={isFullScreen ? "cross-circle" : "check-circle-o"}
+    <div className="full-screen-icon">
+      <CustomIcon
+        type={isFullScreen
+          ? "ensmall"
+          : "enlarge"
+        }
+        size="large"
         onClick={fullScreen}
       />
     </div>

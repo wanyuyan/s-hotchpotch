@@ -11,7 +11,7 @@ const publicPath = "/";
 
 module.exports = {
   mode: 'production',
-  entry: './src/app.jsx',
+  entry: ["./src/app.jsx", "./public/images/icons"],
   output: {
     filename: 'static/js/[name].[hash:8].bundle.js',
     chunkFilename: 'static/js/[name].[contenthash:8].bundle.js',
@@ -106,7 +106,7 @@ module.exports = {
       // file-loader 解决css等文件中引入图片路径的问题，解析图片地址，把图片从源文件拷贝到目标文件并修改源文件名字
       // url-loader 在文件比较小时，直接转变成base64字符串内嵌到页面中
       {
-        test: /\.(png|svg|jpg|gif|svg)$/,
+        test: /\.(png|jpg|gif)$/,
         use: {
           loader: 'url-loader',
           options: {
@@ -114,6 +114,20 @@ module.exports = {
             limit: 5 * 1024
           }
         }
+      },
+      {
+        test: /\.svg$/,
+        loader: 'url-loader',
+        options: {
+          outputPath: "/images",        // 图片输出路径
+          limit: 5 * 1024
+        },
+        exclude: path.resolve(__dirname, "public/imgages/icons")
+      },
+      {
+        test: /\.svg$/,
+        loader: 'svg-sprite-loader',
+        include: path.resolve(__dirname, "public/imgages/icons")
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
@@ -184,6 +198,7 @@ module.exports = {
     extensions: [".js", ".jsx", ".scss", ".css"],
     alias: {
       Components: path.resolve(__dirname, 'src/Components/'),
+      Images: path.resolve(__dirname, "public/images"),
     }
   }
 };
