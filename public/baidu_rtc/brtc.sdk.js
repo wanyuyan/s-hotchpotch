@@ -1,4 +1,5 @@
 import Janus from "./brtc.core";
+import upArrowImg from "../imgs/up_arrow.png";
 
 var server = null;
 server = "wss://rtc.exp.bcelive.com:8989/janus";
@@ -165,7 +166,7 @@ function create_session(){
 									if(on) {
 										// Darken screen and show hint
 										$.blockUI({ 
-											message: '<div><img src="/public/images/up_arrow.png"/></div>',
+											message: `<div><img src=${upArrowImg} /></div>`,
 											css: {
 												border: 'none',
 												padding: '15px',

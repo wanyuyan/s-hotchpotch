@@ -66,15 +66,6 @@ function RTCDemo(props) {
               <Button type="primary" className="room-btn" onClick={start}>进入聊天室</Button>
             </div>
         }
-
-        <img src="public/images/cool-cat.jpeg" width="100px" height="100px" />
-        <div style={{
-          background: "url(public/images/cool-cat.jpeg)",
-          width: 100,
-          height: 100,
-          border: "1px solid #aaa"
-        }}> </div>
-
         <div className="m-netcall hide" id="videos">
           <div className="row">
             <div className="col-md-4">

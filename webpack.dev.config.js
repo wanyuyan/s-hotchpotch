@@ -6,12 +6,12 @@ const antTheme = require('./package.json').antTheme;
 
 module.exports = {
   mode: 'development',
-  entry: ["./src/app.jsx", "./public/images/icons"],
+  entry: ["./src/app.jsx", "./public/imgs/icons"],
   output: {
     filename: '[name].[hash:8].file.js',
     chunkFilename: '[name].[contenthash:8].chunk.js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/',      // CDN地址
+    // publicPath: '/',
   },
   devtool: "inline-source-map",
   devServer: {
@@ -133,22 +133,15 @@ module.exports = {
       },
       // file-loader 解决css等文件中引入图片路径的问题，解析图片地址，把图片从源文件拷贝到目标文件并修改源文件名字
       // url-loader 在文件比较小时，直接转变成base64字符串内嵌到页面中
+      // 当转换成base64字符串时，jsx 中不能直接通过<img src=...> 或 style={{background: url(...)}} 的形式引到图片，可以先import，所以图片加载优先写在css文件中
       {
-        test: /\.(png|jpg|jpeg|gif|svg)$/,
-        exclude: path.resolve(__dirname, "public/images/icons"),
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        exclude: path.resolve(__dirname, "public/imgs/icons"),
         use: [
-          {
-            loader: "file-loader",
-            options: {
-              name: '[path][name].[ext]',
-            }
-          },
           {
             loader: 'url-loader',
             options: {
-              // outputPath: "/images",        // 图片输出路径
-              limit: 5 * 1024,
-              name: '[path][name].[ext]',
+              limit: 6000
             }
           }
         ]
@@ -156,7 +149,7 @@ module.exports = {
       {
         test: /\.svg$/,
         loader: 'svg-sprite-loader',
-        include: path.resolve(__dirname, "public/images/icons")
+        include: path.resolve(__dirname, "public/imgs/icons")
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
@@ -204,7 +197,7 @@ module.exports = {
     extensions: [".js", ".jsx", ".scss", ".css"],
     alias: {
       Components: path.resolve(__dirname, 'src/Components/'),
-      Images: path.resolve(__dirname, "public/images")
+      Imgs: path.resolve(__dirname, "public/imgs/")
     }
   }
 };
