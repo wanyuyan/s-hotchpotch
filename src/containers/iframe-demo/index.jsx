@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { mockTest } from "../../api/demo";
 import arrowImg from "Imgs/up_arrow.png";
 import catImg from "Imgs/cool-cat.jpeg"
 
 const IframeDemo = props => {
+  useEffect(() => {
+    mockTest().then(res => console.log("res", res));
+  }, []);
+
   return (
     <div className="app-container">
-      <iframe
+      {/* <iframe
         height="80%"
         width="100%"
         scrolling="auto"
-        src="https://item.m.jd.com/product/12403508.html?dist=jd" />
+        src="https://item.m.jd.com/product/12403508.html?dist=jd" /> */}
 
       <img src={catImg} width="100px" height="100px" />
       <div style={{
